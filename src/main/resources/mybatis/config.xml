@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!-- 配置缓存策略第一步 -->
+	<settings>
+		<setting name="cacheEnabled" value="true"/>
+	</settings>
+
+
+	<typeAliases>
+		<!--POJO 类的所在package -->
+		<typeAlias  alias="UserEntity"  type="com.liming.ts.entity.TableIp"/>
+	</typeAliases>
+	
+		<!--  因为在SpringMvc-MyBatis中好像定义了Mapper,这里不需要在次定义
+	 <mappers>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+    	<mapper resource="/mybatis/tableIpMapper.xml"/>  
+    </mappers>
+     -->
+
+</configuration>
+

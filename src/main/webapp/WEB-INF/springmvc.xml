@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+    http://www.springframework.org/schema/cache   
+    http://www.springframework.org/schema/cache/spring-cache.xsd
+    http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd"
+	xmlns:util="http://www.springframework.org/schema/util"
+  
+	>
+	
+	
+   <!-- 自动扫描的包名 -->
+
+    <context:component-scan base-package="com.liming.ts">
+    <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/> 
+    </context:component-scan>
+    
+    <!-- 当设置servlet-mapping 设置default ,加上此句话配置 -->
+    <mvc:default-servlet-handler/>
+    <mvc:resources location="/*" mapping="/**" />
+	
+    <!-- 默认的注解映射的支持 -->
+    <mvc:annotation-driven />
+    
+     <!-- 激活@Required @Autowired,JSR 250's @PostConstruct,@PreDestroy and @Resource等标注 -->
+   <context:annotation-config />
+
+    <!-- 视图解释类 -->
+
+    <bean
+
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->
+        <property name="suffix" value=".jsp" />
+    </bean>
+    
+    <!-- 定义转换器，Jackson2 -->
+    <bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+	</bean>
+    <bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+    
+    
+
+</beans>

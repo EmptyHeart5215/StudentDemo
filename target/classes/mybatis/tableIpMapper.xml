@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 这里必须只想dao接口类 -->
+<mapper namespace="com.liming.ts.dao.ITableIpDao">
+	
+	<!-- 配置缓存第二部 -->
+	<cache readOnly="true"  eviction="FIFO"></cache>
+	
+	<!-- 获取ip的总数     useCache="true"为设置缓存-->
+	<select id="GetRowCount" resultType="int"  useCache="true">
+		select count(*) from table_ip
+	</select>
+	
+	<select id="selectByParams" resultType="com.liming.ts.entity.TableIp"  parameterType="map" useCache="true">
+		select * from table_ip
+		
+		order by findTime desc
+		
+		limit ${offset},${size}
+	
+	</select>
+
+	<select id="fetchByParams" resultType="com.liming.ts.entity.TableIp"  parameterType="map"  useCache="true">
+	
+			select * from table_ip
+			where 1=1
+			<if test="country != null and country!=''">
+				and  country = '${country}'
+			</if>
+			<if test="isp != null and isp !=''">
+				and isp = '${isp}'
+			</if>
+	
+			limit ${size}
+	</select>
+     
+       
+    
+</mapper>
